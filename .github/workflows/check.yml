@@ -1,0 +1,58 @@
+name: Verify demo
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      publish_pages:
+        description: Publish the verified example to GitHub Pages
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx --no-install playwright install --with-deps --only-shell chromium
+      - run: npm run check
+      - name: Build receipt
+        run: node bin/summary.mjs demo/__spechatch/receipt.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Package verified demo
+        uses: actions/upload-artifact@v4
+        with:
+          name: spechatch-demo
+          path: demo/
+          retention-days: 1
+      - name: Package Pages site
+        if: github.ref == 'refs/heads/main' && (inputs.publish_pages || (github.event_name == 'push' && vars.SPECHATCH_PAGES == 'true'))
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo/
+  pages:
+    needs: verify
+    if: github.ref == 'refs/heads/main' && (inputs.publish_pages || (github.event_name == 'push' && vars.SPECHATCH_PAGES == 'true'))
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy verified static files
+        id: deploy
+        uses: actions/deploy-pages@v4

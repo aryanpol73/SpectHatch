@@ -1,0 +1,73 @@
+export const workspace = {
+  team: 'Product engineering',
+  cycle: '08',
+  goal: 'Ship a calmer first-run experience.',
+  internalMemo: 'PRIVATE_FIXTURE_CANARY',
+};
+const items = [
+  [
+    41,
+    'Tighten the empty state',
+    'Give first-time visitors a clear next step when the board is empty.',
+    'Backlog',
+    'Normal',
+    'Design',
+  ],
+  [
+    42,
+    'Add keyboard shortcuts',
+    'Open search and create an issue without leaving the keyboard.',
+    'Backlog',
+    'High',
+    'Product',
+  ],
+  [
+    43,
+    'Document retry behavior',
+    'Explain how background jobs recover after a temporary failure.',
+    'Backlog',
+    'Normal',
+    'Platform',
+  ],
+  [
+    44,
+    'Simplify account setup',
+    'Reduce the number of decisions before a new workspace is ready.',
+    'In progress',
+    'High',
+    'Product',
+  ],
+  [
+    45,
+    'Tune the sync indicator',
+    'Make pending and saved changes easy to tell apart.',
+    'In progress',
+    'Normal',
+    'Design',
+  ],
+  [
+    46,
+    'Restore filter preferences',
+    'Keep the selected filter when the board is reopened.',
+    'Done',
+    'Normal',
+    'Platform',
+  ],
+  [
+    47,
+    'Refresh the welcome screen',
+    'Introduce the workspace with a compact, accessible first screen.',
+    'Done',
+    'Normal',
+    'Design',
+  ],
+];
+export const seedIssues = items.map(([id, title, detail, status, priority, area]) => ({
+  id,
+  title,
+  detail,
+  status,
+  priority,
+  area,
+  internalNote: 'PRIVATE_FIXTURE_CANARY',
+}));

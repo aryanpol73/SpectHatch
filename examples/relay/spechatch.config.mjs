@@ -1,0 +1,30 @@
+export default {
+  name: 'Relay / Issue board',
+  buildDir: './dist',
+  testDir: './tests',
+  testMatch: 'board.spec.ts',
+  server: { command: ['node', 'server.mjs'], readyPath: '/health' },
+  mountPath: '/spechatch-preview/',
+  apiPrefix: '/api',
+  reads: [{ path: '/api/workspace', fields: ['team', 'cycle', 'goal'] }],
+  resources: [
+    {
+      path: '/api/issues',
+      key: 'id',
+      id: 'integer',
+      fields: {
+        id: 'number',
+        title: 'string',
+        detail: 'string',
+        status: ['Backlog', 'In progress', 'Done'],
+        priority: ['Normal', 'High'],
+        area: ['Design', 'Platform', 'Product'],
+      },
+      writable: ['title', 'detail', 'status', 'priority', 'area'],
+      required: ['title', 'status', 'priority', 'area'],
+      defaults: { detail: '', status: 'Backlog', priority: 'Normal', area: 'Product' },
+      filterBy: ['status', 'priority'],
+      operations: ['list', 'get', 'create', 'update', 'delete'],
+    },
+  ],
+};

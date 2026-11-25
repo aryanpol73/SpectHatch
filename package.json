@@ -1,0 +1,45 @@
+{
+  "name": "spechatch",
+  "version": "0.1.0",
+  "description": "Turn a passing Playwright test into a stateful static demo, then run the same test against the export.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "spechatch": "./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "files": [
+    "dist",
+    "runtime",
+    "bin/serve.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "example:build": "vite build examples/relay --base=./",
+    "demo": "npm run compile && npm run example:build && node dist/cli.js build --config examples/relay/spechatch.config.mjs --out demo",
+    "verify": "node dist/cli.js verify --config examples/relay/spechatch.config.mjs --out demo",
+    "preview": "node bin/serve.mjs demo",
+    "test": "npm run compile && node --test tests/*.test.mjs",
+    "prepack": "npm run compile",
+    "test:browser": "node --test tests/browser/*.test.mjs",
+    "check": "npm test && npm run demo && npm run test:browser && npm run verify"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@types/node": "22.15.30",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "5.9.3",
+    "vite": "7.3.8"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.56.0 <2"
+  }
+}

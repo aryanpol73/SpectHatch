@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Build receipt · SpecHatch</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./receipt.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand"><span class="mark" aria-hidden="true">◩</span> SpecHatch</div>
+      <a class="back" href="../">Open demo ↗</a>
+    </header>
+    <main>
+      <p class="eyebrow" id="project"></p>
+      <h1>Build receipt<span>.</span></h1>
+      <p id="summary" role="status">Reading verification results…</p>
+      <section id="results" hidden>
+        <div class="facts" id="facts"></div>
+        <h2>Verified workflows</h2>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Playwright test</th>
+                <th>Live app</th>
+                <th>Static export</th>
+              </tr>
+            </thead>
+            <tbody id="cases"></tbody>
+          </table>
+        </div>
+        <h2>Exercised API routes</h2>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Route</th>
+                <th>Requests</th>
+              </tr>
+            </thead>
+            <tbody id="routes"></tbody>
+          </table>
+        </div>
+        <footer><span id="fingerprint"></span><a href="./receipt.json">Raw JSON ↗</a></footer>
+      </section>
+    </main>
+    <script type="module" src="./receipt.mjs"></script>
+  </body>
+</html>

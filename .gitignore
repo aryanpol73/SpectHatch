@@ -1,0 +1,11 @@
+node_modules/
+dist/
+examples/*/dist/
+demo/
+.spechatch-*/
+*.spechatch-lock/
+test-results/
+playwright-report/
+*.tgz
+.env
+.env.*
