@@ -2,6 +2,8 @@
 
 Turn a passing Playwright test into a static demo that visitors can actually edit.
 
+[Try the issue board](https://aryanpol73.github.io/SpectHatch/) · [View its build receipt](https://aryanpol73.github.io/SpectHatch/__spechatch/receipt.html) · [Read the test](examples/relay/tests/board.spec.ts)
+
 SpecHatch starts your seeded app, runs your browser tests, and stops the backend. It packages your frontend with a small browser-side implementation of the API routes you declare. It then runs the **same test files and assertions** against that export. A passing build produces a static folder, a human-readable build receipt, and a resettable sandbox for each visitor.
 
 **Try this in the included Relay issue board:** create an issue with a title of your choice, move it to **Done**, and reload. Your change persists. Open a fresh browser profile and the board starts with the original sample data. Select **Build receipt** to see which workflows passed and which API routes they exercised.
@@ -19,7 +21,7 @@ npm run preview
 
 Open **http://127.0.0.1:4173**. The preview process serves static files. You can stop and restart it without resetting your browser's data. The sample API ran only while building.
 
-**Release ZIP:** the included `demo/` is already built. Run `node bin/serve.mjs demo` to try it immediately with Node alone. The ZIP also includes the installable CLI tarball in `packages/`. During local development, `SPECHATCH_CHROMIUM_PATH` can point to an installed compatible Chromium executable. On a minimal Linux installation use `npx playwright install --with-deps --only-shell chromium`.
+**[Download the release ZIP](https://github.com/aryanpol73/SpectHatch/releases/latest):** the included `demo/` is already built. Run `node bin/serve.mjs demo` to try it immediately with Node alone. The ZIP also includes the installable CLI tarball in `packages/`. During local development, `SPECHATCH_CHROMIUM_PATH` can point to an installed compatible Chromium executable. On a minimal Linux installation use `npx playwright install --with-deps --only-shell chromium`.
 
 ## When it fits
 
@@ -98,6 +100,8 @@ The included [workflow](.github/workflows/check.yml) verifies public-repository 
 To host the example on GitHub Pages, select **Settings → Pages → Source → GitHub Actions** on a public repository. In **Actions → Verify demo → Run workflow**, enable **Publish the verified example**. To publish each passing main-branch build, set the repository Actions variable `SPECHATCH_PAGES=true`. The deployment job depends on verification and runs only on main. The sample verifies at a nested URL so relative assets and scope are exercised before deployment.
 
 GitHub documents Pages availability for public repositories on its Free plan and the billing rules for standard public-repository runners. [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) · [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
+
+When you publish a GitHub Release with a tag matching the package version, the workflow repeats the checks and attaches a ready-to-run ZIP and installable npm tarball.
 
 ## Development
 

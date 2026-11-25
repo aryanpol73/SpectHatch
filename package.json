@@ -41,5 +41,10 @@
   },
   "peerDependencies": {
     "@playwright/test": ">=1.56.0 <2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryanpol73/SpectHatch.git"
+  },
+  "homepage": "https://github.com/aryanpol73/SpectHatch#readme"
 }
